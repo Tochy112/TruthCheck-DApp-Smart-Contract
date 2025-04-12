@@ -6,7 +6,7 @@ contract FactChecker {
     
     struct Submission {
         address submitter;
-        string content; // IPFS hash or link
+        string content; // hash or link
         uint trueVotes;
         uint falseVotes;
         Verdict finalVerdict;
@@ -20,7 +20,7 @@ contract FactChecker {
     event Voted(uint id, address voter, bool vote);
     event VerdictDecided(uint id, Verdict result);
     
-    uint public voteThreshold = 5;
+    uint public voteThreshold = 2;
     
     // Checks if submission ID exists
     modifier validSubmission(uint _id) {
@@ -116,6 +116,46 @@ contract FactChecker {
         }
         
         return (ids, submitters, contents, trueVotes, falseVotes, finalVerdicts);
+    }
+    
+    // Get all submissions by a specific user
+    function getSubmissionsByUser(address _user) external view returns (
+        uint[] memory ids,
+        string[] memory contents,
+        uint[] memory trueVotes,
+        uint[] memory falseVotes,
+        Verdict[] memory finalVerdicts
+    ) {
+        // First count how many submissions belong to this user
+        uint userSubmissionCount = 0;
+        for (uint i = 1; i <= submissionCount; i++) {
+            if (submissions[i].submitter == _user) {
+                userSubmissionCount++;
+            }
+        }
+        
+        // Initialize arrays with the correct size
+        ids = new uint[](userSubmissionCount);
+        contents = new string[](userSubmissionCount);
+        trueVotes = new uint[](userSubmissionCount);
+        falseVotes = new uint[](userSubmissionCount);
+        finalVerdicts = new Verdict[](userSubmissionCount);
+        
+        // Populate arrays with the user's submission data
+        uint currentIndex = 0;
+        for (uint i = 1; i <= submissionCount; i++) {
+            if (submissions[i].submitter == _user) {
+                Submission storage s = submissions[i];
+                ids[currentIndex] = i;
+                contents[currentIndex] = s.content;
+                trueVotes[currentIndex] = s.trueVotes;
+                falseVotes[currentIndex] = s.falseVotes;
+                finalVerdicts[currentIndex] = s.finalVerdict;
+                currentIndex++;
+            }
+        }
+        
+        return (ids, contents, trueVotes, falseVotes, finalVerdicts);
     }
     
     // Get total number of submissions
