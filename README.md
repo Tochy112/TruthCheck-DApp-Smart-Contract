@@ -1,13 +1,14 @@
-# Sample Hardhat Project
+# 🗳️ On-Chain Fact Checker
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+A decentralized voting system on the blockchain where users can submit content (e.g., news, claims, images) and the community votes to verify its authenticity.
 
-Try running some of the following tasks:
+Built with Solidity smart contracts, this dApp promotes transparency and trust by recording submissions and votes immutably on-chain.
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.ts
-```
+## 🔍 Features
+
+- ✅ Submit any content for public verification.
+- 👍👎 Community-based voting system.
+- ⚖️ Verdict is automatically decided based on a vote threshold.
+- 🔍 Retrieve and view all submissions and their results on-chain.
+- 🧠 Track user-specific submissions and voting history.
+
