@@ -4,10 +4,10 @@ require("dotenv").config();
 
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.28",
+  solidity: "0.8.26",
   networks: {
-    sepolia: {
-      url: "https://wild-wild-asphalt.ethereum-sepolia.quiknode.pro/4d49c2ad72fe7b0c3fa2334c49dd40121ed1a520/",
+    baseSepolia: {
+      url: "https://serene-purple-daylight.base-sepolia.quiknode.pro/4ee21aa040bdecd6acf1aaef5b52edb531928345/",
       accounts: [process.env.PRIVATE_KEY!]
     }
   }
