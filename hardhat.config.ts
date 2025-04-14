@@ -7,7 +7,7 @@ const config: HardhatUserConfig = {
   solidity: "0.8.26",
   networks: {
     baseSepolia: {
-      url: "https://serene-purple-daylight.base-sepolia.quiknode.pro/4ee21aa040bdecd6acf1aaef5b52edb531928345/",
+      url: process.env.QUICK_NODE_BASE_SEPOLIA_URL,
       accounts: [process.env.PRIVATE_KEY!]
     }
   }
